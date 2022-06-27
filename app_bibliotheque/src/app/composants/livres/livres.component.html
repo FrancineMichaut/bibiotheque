@@ -1,0 +1,161 @@
+<!-- *********************************   row  div  **************************************************** -->
+<div class="row">
+
+
+  <!-- **************************** 3 boutons de genre et un retour**********************  -->
+
+  <div class="col-1">
+
+
+    <div class=" filtreBouton">
+      <div *ngFor="let g of genre" class="btn btn btn-outline-dark mt-2 w-100"><small (click)="onGenre(g)">{{g}}
+        </small>
+      </div>
+    </div>
+
+    <!-- *********************   ma recherche par prix ****************** -->
+
+    <div class=" mb-5 mt-5">
+
+      <form class="row g-3 " (ngSubmit)="onPrice(f.value)" #f="ngForm">
+        <div class="col-auto">
+
+          <input type="number" ngModel name="min" class="form-control" placeholder="prix minimum">
+        </div>
+        <div class="col-auto">
+
+          <input type="number" ngModel name="max" class="form-control" placeholder="prix maximum">
+        </div>
+
+        <div class="col-auto">
+          <button type="submit" class="btn btn-light">chercher par prix</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- *************************** fin de ma recherche par prix *******************************  -->
+
+<!-- *******************************************ma recherche par mot-clef************************************ -->
+
+<div class=" mb-5 mt-5">
+
+  <form class="row g-3 " (ngSubmit)="onKeyWord(fo.value)" #fo="ngForm">
+    <div class="col-auto">
+
+      <input type="text" ngModel name="motClef" class="form-control" placeholder="mot_clef">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-light">chercher mot-clef</button>
+    </div>
+  </form>
+</div>
+<!-- *******************************************Fin de ma recherche par mot-clef************************************ -->
+
+
+  </div>
+
+
+  <!-- *********************************   fin col 1  div  **************************************************** -->
+  <div class="col-11">
+    <div class="album bg-light">
+      <div class="container">
+
+        <div class="row  mt-5 d-flex flex-wrap">
+          <div class="col" *ngFor="let l of livres">
+            <div class="card shadow-sm my-3" style="height:550px; width: 200px;">
+              <div class="" style="height:300px;">
+                <img src={{l.imageUrl}} class="card-img-top overflow-hidden" style="height:300px;" alt="...">
+              </div>
+              <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title">{{l.titre}}</h5>
+                <p class="card-text">{{l.auteur}}</p>
+                <p class="card-text">{{l.genre}}</p>
+                <p class="card-text">{{l.prix}}€</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                      (click)="deletelivre(l._id)">Delete</button>
+
+
+
+
+                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="recupLivre(l)"
+                      data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+
+
+
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier un livre</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Formulaire!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                <form>
+                  <div class="mb-3">
+
+                    <label class="form-label">Titre</label>
+                    <input type="text" name="titre" class="form-control" [(ngModel)]="livre.titre">
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Auteur</label>
+                    <input type="text" name="auteur" class="form-control" [(ngModel)]="livre.auteur">
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Genre</label>
+                    <input type="text" name="genre" class="form-control" [(ngModel)]="livre.genre">
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">imageUrl</label>
+                    <input type="text" name="imageUrl" class="form-control" [(ngModel)]="livre.imageUrl">
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Prix</label>
+                    <input type="number" name="prix" class="form-control" [(ngModel)]="livre.prix">
+                  </div>
+
+
+                  <button type="submit" class="btn btn-primary" (click)="saverecupLivre()">Save</button>
+                </form>
+
+
+
+
+
+
+
+
+                <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Fin Formulaire!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
